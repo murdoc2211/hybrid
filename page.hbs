@@ -1,0 +1,22 @@
+{{!< default}}
+{{#post}}
+{{>banner/page}}
+<div class="main-wrap"> 
+	<div class="row">		       
+	    <div class="main-content {{#has tag="_left_sidebar, _right_sidebar"}}col-md-9 {{#has tag="_left_sidebar"}}col-md-push-3{{/has}}{{else}}col-md-12{{/has}}">
+	        <div class="body-content" role="main">
+	        	<div class="post-content">
+	        		<div class="content-area">
+	        			{{content}}
+	        		</div>
+	        	</div>               
+	        </div>
+	    </div>
+	    {{#has tag="_left_sidebar, _right_sidebar"}}
+	    <div class="sidebar col-md-3 {{#has tag="_left_sidebar"}}col-md-pull-9{{/has}}">
+	    {{>sidebar/default}} 
+	    </div>
+	    {{/has}}
+	</div>
+</div>
+{{/post}}

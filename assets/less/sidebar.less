@@ -1,0 +1,20 @@
+.sidebar{
+	.sidebar-wrap{
+		background-color: @sidebar-background;
+		padding: ( @spacing - 10 ) @spacing @spacing @spacing;
+		.sf-border-radius(@border-radius);
+		.widget{
+			color: @sidebar-widget-content-color;
+			margin-bottom: @spacing;
+			&.search-widget{
+				margin-bottom: ( @spacing - 10 );
+			}
+			&:last-of-type{
+				margin-bottom: 0;
+			}
+			.widget-title{
+				color: @sidebar-widget-title-color;
+			}
+		}
+	}
+}

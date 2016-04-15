@@ -1,0 +1,90 @@
+<div class="post-list small-style">
+	<div class="row">
+		{{#foreach posts columns=3}}
+			{{#if @rowStart}}
+			<div class="col-md-4 small-item {{post_class}} {{#if image}}has-thumb{{/if}}">
+				<div class="post-inner {{#if image}}has-thumb{{/if}}" {{#if image}}style="background-image: url({{image}})"{{/if}}>
+					<div class="post-header">         
+			            <div class="header-wrap">
+			            	{{#if tags}}
+		                    <div class="post-tags">{{tags separator=" "}}</div>
+		                    {{/if}}
+			                <h2 itemprop="name" class="post-title">
+			                    <a itemprop="url" href="{{url}}">{{{title}}}</a>
+			                </h2>
+			                <div class="top-meta">
+			                	{{author}} / <time datetime="{{date published_at format="YYYY-MM-DD"}}" itemprop="datePublished"> {{date published_at}} </time>
+			                </div>
+			                <div itemprop="description" class="post-desc">
+			                    {{excerpt words="15"}} ...
+			                </div>
+			                <div class="bottom-meta">
+			                	<a href="{{url}}" class="read-more">                            
+			                        Read More <i class="fa fa-long-arrow-right"></i>
+			                    </a>				                
+			                    <span class="share">                            
+			                        <i class="fa fa-share-alt"></i>
+			                        <span class="share-box full-color">
+			                        	{{>misc/share-icons}}
+			                        </span>
+			                    </span>
+				            </div>
+			            </div>
+			        </div>
+			        {{#unless image}}
+	                <div class="temp-content">
+	                    {{content words="0"}}
+	                </div>
+	                {{/unless}}					
+				</div>
+			</div>
+			{{else}}
+			<div class="col-md-4 small-item {{post_class}} {{#if image}}has-thumb{{/if}}">
+				<div class="post-inner {{#if image}}has-thumb{{/if}}" {{#if image}}style="background-image: url({{image}})"{{/if}}>
+					<div class="post-header">         
+			            <div class="header-wrap">
+			                {{#if tags}}
+		                    <div class="post-tags">{{tags separator=" "}}</div>
+		                    {{/if}}
+			                <h2 itemprop="name" class="post-title">
+			                    <a itemprop="url" href="{{url}}">{{{title}}}</a>
+			                </h2>
+			                <div class="top-meta">
+			                	{{author}} / <time datetime="{{date published_at format="YYYY-MM-DD"}}" itemprop="datePublished"> {{date published_at}} </time>
+			                </div>
+			                <div itemprop="description" class="post-desc">
+			                    {{excerpt words="15"}} ...
+			                </div>
+			                <div class="bottom-meta">
+			                	<a href="{{url}}" class="read-more">                            
+			                        Read More <i class="fa fa-long-arrow-right"></i>
+			                    </a>				                
+			                    <span class="share">                            
+			                        <i class="fa fa-share-alt"></i>
+			                        <span class="share-box full-color">
+			                        	{{>misc/share-icons}}
+			                        </span>
+			                    </span>
+				            </div>
+			            </div>
+			        </div>
+			        {{#unless image}}
+	                <div class="temp-content">
+	                    {{content words="0"}}
+	                </div>
+	                {{/unless}}	
+				</div>
+			</div>
+			{{/if}}
+		{{/foreach}}
+	</div>
+</div>
+{{#if pagination}}
+<div class="row">
+	<div class="col-md-12">
+	    <div class="pagination-wrap">
+	        {{pagination}}  
+	    </div>
+	</div>
+</div>
+{{/if}}

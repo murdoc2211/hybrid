@@ -1,0 +1,68 @@
+{{!< default}}
+{{#post}}
+{{>banner/post}}
+<div class="main-wrap"> 
+	<div class="row">		       
+	    <div class="main-content {{#has tag="_left_sidebar, _right_sidebar"}}col-md-9 {{#has tag="_left_sidebar"}}col-md-push-3{{/has}}{{else}}col-md-12{{/has}}">
+	        <div class="body-content" role="main">
+	        	<div class="post-content">	        		
+	        		<div class="top-meta clearfix">
+	        			<div class="post-time">
+							<span class="text-label">Posted On</span>
+							<time datetime="{{date published_at format="YYYY-MM-DD"}}">
+	                            {{date}}
+	                        </time>
+	                    </div>
+	                    <div class="post-comments">
+	                    	<span class="disqus-comment-count" data-disqus-identifier="{{id}}"></span>
+	                    </div>
+	        		</div>
+	        		<div class="content-area">
+		        		{{content}}	
+		        		<div class="share-box full-color">
+		        			<span class="box-title">
+		        				Spread the word:
+		        			</span >
+	                    	{{>misc/share-icons}}
+	                    </div>        		   			        			
+		        		{{#author}}	
+						<footer class="post-footer clearfix">              	            
+			                <div  itemprop="author" itemscope itemtype="http://schema.org/Person" class="post-author">
+			                    {{#if image}}                    
+			                    <div class="avatar">
+			                        <img class="img-reponsive" itemprop="image" src="{{image}}" alt="{{name}}" />
+			                    </div>
+			                    {{/if}}
+			                    <div class="post-author-content">
+				                    <h4 class="author-name">
+				                    	Written by <a href="{{url}}" itemprop="url" class="post-author-name"><span itemprop="name">{{name}}</span></a>
+				                    </h4>	                    
+				                    <div class="author-info">
+				                    	{{#if location}}<i class="fa fa-home"></i> <span>{{location}}</span>{{/if}}
+				                    	{{#if website}}<i class="fa fa-globe"></i> <a href="{{website}}">{{website}}</a>{{/if}}
+				                    </div>	                                        
+				                    <p itemprop="description">
+				                    	{{#if bio}}
+				                        	{{bio}}
+				                        {{else}}
+				                        	The author didnt add any Information to his profile yet
+				                        {{/if}}                    	
+				                    </p>
+			                    </div>
+			                </div>	            
+				        </footer>
+				        {{/author}}
+				        {{>misc/next-prev-posts}}
+				        {{>misc/comment}}
+				    </div>
+	        	</div>               
+	        </div>
+	    </div>
+	    {{#has tag="_left_sidebar, _right_sidebar"}}
+	    <div class="sidebar col-md-3 {{#has tag="_left_sidebar"}}col-md-pull-9{{/has}}">
+	    {{>sidebar/default}} 
+	    </div>
+	    {{/has}}
+	</div>
+</div>
+{{/post}}

@@ -1,0 +1,38 @@
+<div class="footer">
+	<div class="widget-area">
+		<div class="widget-area-wrap">
+			<div class="row">
+				<div class="col-md-4">
+					{{>widget/recent-tweets}}				
+					{{!>widget/tags}}
+					
+				</div>
+				<div class="col-md-4">					
+					{{>widget/newsletter}}
+					{{!>widget/recent-posts}}
+					{{!>widget/search}}
+					{{!>widget/tag-cloud}}
+				</div>
+				<div class="col-md-4">
+					<!-- INSTANSIVE WIDGET --><script src="//instansive.com/widget/js/instansive.js"></script><iframe src="//instansive.com/widgets/21131a7819a8573a91f119e778027120.html" id="instansive_21131a7819" name="instansive_21131a7819"  scrolling="no" allowtransparency="true" class="instansive-widget" style="width: 100%; border: 0; overflow: hidden;"></iframe>
+
+					{{!>widget/navigation}}
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="bottom-area">
+		<div class="bottom-area-wrap">
+			<div class="row">
+				<div class="col-md-6 col-md-push-6">
+					<div class="full-color">						
+						{{>misc/social-icons}}
+					</div>
+				</div>
+				<div class="col-md-6 col-md-pull-6">					
+					<p class="copyright">Copyright &copy; 2016 <a href="/">{{@blog.title}}</a> All rights reserved.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,39 @@
+{
+	"/Users/dhavalbudhdeo/Downloads/themeforest-10537601-hybrid-a-modern-grid-theme-for-ghost/theme/redefined/style4/hybrid/assets/css/style.min.css": {
+		"hash": "5ce11359",
+		"date": "20160209152757",
+		"versioned": "/Users/dhavalbudhdeo/Downloads/themeforest-10537601-hybrid-a-modern-grid-theme-for-ghost/theme/redefined/style4/hybrid/assets/css/style.min.css",
+		"files": [
+			{
+				"file": "/Users/dhavalbudhdeo/Downloads/themeforest-10537601-hybrid-a-modern-grid-theme-for-ghost/theme/redefined/style4/hybrid/assets/css/bootstrap.min.css",
+				"hash": "af2bbe1",
+				"versioned": "/Users/dhavalbudhdeo/Downloads/themeforest-10537601-hybrid-a-modern-grid-theme-for-ghost/theme/redefined/style4/hybrid/assets/css/bootstrap.min.css"
+			},
+			{
+				"file": "/Users/dhavalbudhdeo/Downloads/themeforest-10537601-hybrid-a-modern-grid-theme-for-ghost/theme/redefined/style4/hybrid/assets/css/custom.css",
+				"hash": "0",
+				"versioned": "/Users/dhavalbudhdeo/Downloads/themeforest-10537601-hybrid-a-modern-grid-theme-for-ghost/theme/redefined/style4/hybrid/assets/css/custom.css"
+			},
+			{
+				"file": "/Users/dhavalbudhdeo/Downloads/themeforest-10537601-hybrid-a-modern-grid-theme-for-ghost/theme/redefined/style4/hybrid/assets/css/font-awesome.min.css",
+				"hash": "513b35cf",
+				"versioned": "/Users/dhavalbudhdeo/Downloads/themeforest-10537601-hybrid-a-modern-grid-theme-for-ghost/theme/redefined/style4/hybrid/assets/css/font-awesome.min.css"
+			},
+			{
+				"file": "/Users/dhavalbudhdeo/Downloads/themeforest-10537601-hybrid-a-modern-grid-theme-for-ghost/theme/redefined/style4/hybrid/assets/css/magnific-popup.css",
+				"hash": "7ea2116f",
+				"versioned": "/Users/dhavalbudhdeo/Downloads/themeforest-10537601-hybrid-a-modern-grid-theme-for-ghost/theme/redefined/style4/hybrid/assets/css/magnific-popup.css"
+			},
+			{
+				"file": "/Users/dhavalbudhdeo/Downloads/themeforest-10537601-hybrid-a-modern-grid-theme-for-ghost/theme/redefined/style4/hybrid/assets/css/prism.css",
+				"hash": "6d97c815",
+				"versioned": "/Users/dhavalbudhdeo/Downloads/themeforest-10537601-hybrid-a-modern-grid-theme-for-ghost/theme/redefined/style4/hybrid/assets/css/prism.css"
+			},
+			{
+				"file": "/Users/dhavalbudhdeo/Downloads/themeforest-10537601-hybrid-a-modern-grid-theme-for-ghost/theme/redefined/style4/hybrid/assets/css/style.css",
+				"hash": "6f458da4",
+				"versioned": "/Users/dhavalbudhdeo/Downloads/themeforest-10537601-hybrid-a-modern-grid-theme-for-ghost/theme/redefined/style4/hybrid/assets/css/style.css"
+			}
+		]
+	}
+}

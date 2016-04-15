@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {{! Document Settings }}
+    <meta charset="utf-8" />
+    {{! Page Meta }}
+    <title>{{meta_title}}</title>
+    <meta name="description" content="{{meta_description}}" />
+    <link href="{{asset "img/favicon.ico"}}" rel="shortcut icon" type="image/x-icon">
+    <link href="{{asset "img/apple-touch-icon-precomposed.png"}}" rel="apple-touch-icon">
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="MobileOptimized" content="320" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">       
+    <meta name="google-site-verification" content=""> {{! Change for Google Webmaster verification }}
+    {{ghost_head}}
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:regular,italic,700%7CMontserrat:regular,700' rel='stylesheet' type='text/css'> {{! Change google font here }}        
+    <link rel="stylesheet" type="text/css" href="{{asset "css/style.min.css"}}" />
+    <link rel="stylesheet" type="text/css" href="{{asset "css/colors/muted-teal.css"}}" />
+	<link rel="stylesheet" type="text/css" href="{{asset "css/custom.css"}}" />     
+    <script type="text/javascript"> var rootUrl = '{{@blog.url}}';</script>        
+    {{! Place your Google Analytic here }}
+</head>
+<body class="{{body_class}}"
+    data-parallax="true">        
+    <!--[if lt IE 9]>
+    <div class="outdated-frame">
+        You are using an <strong>outdated</strong> browser. Please <a href="http://www.google.com/chrome/intl/en/landing_chrome.html">upgrade your browser</a>.
+    </div>
+    <![endif]--> 
+    <div class="body-wrap">
+        {{>header/default}}        
+        {{{body}}}        
+        {{>footer/default}} 
+    </div>
+    <div class="go-to-top-wrap">
+        <a href="javascript:;" class="go-to-top"><i class="fa fa-angle-up"></i></a>
+    </div>	
+    {{ghost_foot}}    
+    {{{block "customScript"}}}
+    <script type="text/javascript" src="{{asset "js/main.min.js"}}"></script>  
+</body>
+</html>
