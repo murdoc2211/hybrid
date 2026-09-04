@@ -71,7 +71,7 @@ summ=pd.DataFrame([
  ['Max DOH - established SKUs after ship','%.0f'%df[(df.arrival=='')&(df.drr_sep>0)&(df.ship>0)].doh_after.max()],
  ['New arrival units (group A - new PO)',int(df[df.arrival=='A-new PO'].ship.sum())],
  ['New arrival units (group B - never sold)',int(df[df.arrival=='B-never sold (recent)'].ship.sum())],
- ['Excluded - no supply','Click 20000, Quad Pro 1.5m 60W'],
+ ['Excluded - no supply','Click 20000, Quad Pro 1.5m 60W, Zeno 65W retractable'],
  ['Excluded - EOL (no Tally sale FY26-27)','%d SKUs / %du / Rs %s'%(int((df.eol&(df.open_po>0)).sum()),int(df[df.eol].open_po.sum()),'{:,.0f}'.format((df[df.eol].open_po*df[df.eol].cost).sum()))],
  ['Excluded - other vendor code','PPAFS / 147u at HBA4, HKA2, HNR4, HPN6'],
  ['Excluded - EXPIRED PO','39VRVKCF / 1,105u - window closed 1 Sep, get it cancelled'],

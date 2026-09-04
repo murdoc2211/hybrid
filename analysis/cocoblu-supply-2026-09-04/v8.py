@@ -15,7 +15,7 @@ print(f'  units removed from supply pool: {exp_units}  (Rs {exp_val:,.0f} at cos
 pe=pe[~pe.PO.isin(expired)]
 op=pe[pe['Remaining quantity']>0]
 
-SOLDOUT={'B0DFZ1KDPL','B0C1H6N3FX','B0DSFKRMDM'}
+SOLDOUT={'B0DFZ1KDPL','B0C1H6N3FX','B0DSFKRMDM','B0G4VHN9CZ'}  # +Zeno 65W retractable
 # ---- EOL gate: a SKU is supplyable only if it was actually billed to Cocoblu in Tally
 # this FY (26-27), or it is a genuine new arrival that cannot have Tally history yet.
 import pandas as _pd

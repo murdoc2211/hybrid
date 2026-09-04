@@ -18,9 +18,10 @@ Vendor Central PO Item Export and the Sales/Inventory/Open-PO workbook.
   accepted quantity.
 - Superseded incumbents (old GIGA, Click Slim) bridged to 15 days. Quad Pro Max
   is live and coexists with Quad Pro Black - normal 35d cap.
-- No supply available (excluded): Click 20000, Quad Pro 1.5m 60W.
+- No supply available (excluded): Click 20000, Quad Pro 1.5m 60W, Zeno 65W retractable.
 
-Result: ship 4,129u / Rs 73.0L, hold 8,666u, cancel 177u of EOL, ask for 604u.
+Result: ship 3,845u / Rs 68.3L, hold 8,950u, ask for 604u. 1,740u of open PO
+(Rs 17.0L) is unsupplyable (EOL or out of stock) and should be cancelled.
 
 ## v4 (superseded) - no EOL gate - expired POs removed
 
@@ -38,7 +39,7 @@ Result: ship 4,129u / Rs 73.0L, hold 8,666u, cancel 177u of EOL, ask for 604u.
   Quad Pro Max is live and coexists with Quad Pro Black - normal 35d cap.
 - Residual lines of 20u or fewer on zero-stock SKUs ship in full to close the
   PO line; immaterial quantities, and it protects fill rate.
-- No supply available (excluded): Click 20000, Quad Pro 1.5m 60W,
+- No supply available (excluded): Click 20000, Quad Pro 1.5m 60W, Zeno 65W retractable.
   Quad Pro Black 1.5m.
 
 Result: ship 4,200u / Rs 74.1L across 6 live POs, hold 8,595u, ask Amazon for 604u.
@@ -59,7 +60,7 @@ Result: ship 4,200u / Rs 74.1L across 6 live POs, hold 8,595u, ask Amazon for 60
 - Quad Pro Max is **not** superseded by Quad Pro Black - 240W/1.5m vs 100W/1.2m
   are different spec tiers that coexist, both live. Max takes the normal 35d
   cap (ships 60), not a run-down.
-- No supply available (excluded): Click 20000, Quad Pro 1.5m 60W,
+- No supply available (excluded): Click 20000, Quad Pro 1.5m 60W, Zeno 65W retractable.
   Quad Pro Black 1.5m.
 
 Result: ship 4,281u / Rs 74.7L, hold 9,619u, ask Amazon for 559u not on any PO.
@@ -74,7 +75,7 @@ Constraints applied:
 
 - Vendor code **QZ73J**, ship-to **ISK3** only. PPAFS lines (147u across HBA4/HKA2/HNR4/HPN6) excluded.
 - Hard **35-day** cover cap on Sept DRR. No SKU ends above cover after shipping.
-- No supply available (excluded): Click 20000, Quad Pro 1.5m 60W, Quad Pro Black 1.5m.
+- No supply available (excluded): Click 20000, Quad Pro 1.5m 60W, Zeno 65W retractable. Quad Pro Black 1.5m.
 - **Franchise netting**: a new launch shares a demand pool with the SKU it replaces,
   so GIGA/GIGA II, Click Slim/Click+, and Quad Pro Max/Quad Pro Black are capped
   together. Incumbent is bridged at 15 days through changeover, successor takes the
