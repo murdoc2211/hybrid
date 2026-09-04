@@ -3,7 +3,23 @@
 Urgent dispatch plan against open Amazon POs for Stuffcool, built from the
 Vendor Central PO Item Export and the Sales/Inventory/Open-PO workbook.
 
-## Output
+## v2 (current) - 35-day cap, ISK3 only
+
+`Cocoblu_Supply_Plan_v2_35day_ISK3.xlsx` - built by `v2.py -> v4.py -> v5.py -> x2.py`
+
+Constraints applied:
+
+- Vendor code **QZ73J**, ship-to **ISK3** only. PPAFS lines (147u across HBA4/HKA2/HNR4/HPN6) excluded.
+- Hard **35-day** cover cap on Sept DRR. No SKU ends above cover after shipping.
+- No supply available (excluded): Click 20000, Quad Pro 1.5m 60W, Quad Pro Black 1.5m.
+- **Franchise netting**: a new launch shares a demand pool with the SKU it replaces,
+  so GIGA/GIGA II, Click Slim/Click+, and Quad Pro Max/Quad Pro Black are capped
+  together. Incumbent is bridged at 15 days through changeover, successor takes the
+  remainder of the franchise budget.
+
+Result: ship 3,280u / Rs 61.5L, hold 10,620u, ask Amazon for 559u not on any PO.
+
+## v1 output (superseded - 45d cover, all FCs)
 
 `Cocoblu_Supply_Plan_04Sep2026.xlsx`
 
