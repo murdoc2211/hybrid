@@ -2,7 +2,7 @@ import pandas as pd, numpy as np
 from openpyxl.styles import Font,PatternFill,Alignment
 from openpyxl.utils import get_column_letter
 import openpyxl
-df=pd.read_pickle('v5df.pkl'); pe=pd.read_pickle('po_exp.pkl')
+df=pd.read_pickle('v6df.pkl'); pe=pd.read_pickle('po_exp.pkl')
 pe['Remaining quantity']=pd.to_numeric(pe['Remaining quantity'],errors='coerce').fillna(0)
 pe['Cost']=pd.to_numeric(pe['Cost'],errors='coerce').fillna(0)
 pe=pe[(pe['Vendor code']=='QZ73J')&(pe['Ship-to location']=='ISK3')]
@@ -11,11 +11,12 @@ COVER=35
 
 def _t(r):
     if r.soldout: return 'X-No supply'
-    if r.newpo>0 or r.franchise!='': return 'P0-Franchise (new launch)'
-    if r.ship>0 and r.drr_sep==0: return 'P3-Seed (out of stock)'
+    if r.arrival=='A-new PO': return 'P0-New arrival (uncapped)'
+    if r.arrival=='B-never sold (recent)': return 'P0b-New arrival, never sold'
+    if r.franchise!='': return 'P1-Incumbent (running down)'
     if r.drr_sep==0: return 'P5-No demand'
-    if r.doh_now<15: return 'P1-Critical'
-    if r.ship>0: return 'P2-Top-up'
+    if r.doh_now<15: return 'P2-Critical'
+    if r.ship>0: return 'P3-Top-up to 35d'
     return 'P4-Hold (at/over 35d)'
 df['tier']=df.apply(_t,axis=1)
 
@@ -34,13 +35,16 @@ a=pd.DataFrame(rows); a['Ship_value']=(a.SHIP_NOW*a.Cost).round(0)
 a=a.join(df['tier'].rename('Tier'),on='ASIN').sort_values(['Tier','Ship_value'],ascending=[True,False])
 
 sku=df.reset_index().rename(columns={'index':'ASIN'})
-sku=sku[['ASIN','sku','name','tier','franchise','sellable','drr_sep','doh_now','need','open_po','ship','doh_after','hold','gap','cost','ship_val','open_pos','soldout']]
-sku.columns=['ASIN','SKU','Product','Tier','Franchise','Sellable @3Sep','DRR (1-3 Sep)','DOH now','Need @35d','Open PO','SHIP NOW','DOH after','Hold on PO','Gap - need PO','Vendor cost','Ship value INR','Open POs','No supply']
+sku=sku[['ASIN','sku','name','tier','arrival','franchise','sellable','drr_sep','doh_now','need','open_po','ship','doh_after','hold','gap','cost','ship_val','open_pos','soldout']]
+sku.columns=['ASIN','SKU','Product','Tier','New arrival','Franchise','Sellable @3Sep','DRR (1-3 Sep)','DOH now','Need @35d','Open PO','SHIP NOW','DOH after','Hold on PO','Gap - need PO','Vendor cost','Ship value INR','Open POs','No supply']
 sku=sku[(sku['Sellable @3Sep']>0)|(sku['Open PO']>0)|(sku['DRR (1-3 Sep)']>0)].sort_values(['Tier','Ship value INR'],ascending=[True,False])
 
-fr=pd.DataFrame([['GIGA 20000',11.3,79,396,317,618,318],['Click 10000 magnetic',18.0,226,630,404,1004,404],
- ['Quad Pro cable',12.0,360,420,60,360,60]],columns=['Franchise','Combined DRR','Stock now','35d cap','Room to ship','Amazon asks','SHIP (capped)'])
-fr['Trimmed from ask']=fr['Amazon asks']-fr['SHIP (capped)']
+FRG={'GIGA 20000':['B0DMDZF5SV','B0HFJGKC8H'],'Click 10000 magnetic':['B0DFZ3FK9F','B0HGB1DJKY','B0HGB1T2S7','B0CG668622'],'Quad Pro cable':['B0D8443PTW','B0H71NCHP7']}
+fr=pd.DataFrame([[f,round(df.loc[m,'drr_sep'].sum(),1),int(df.loc[m,'sellable'].sum()),int(df.loc[m,'ship'].sum()),
+  int(df.loc[m,'sellable'].sum()+df.loc[m,'ship'].sum()),
+  round((df.loc[m,'sellable'].sum()+df.loc[m,'ship'].sum())/df.loc[m,'drr_sep'].sum(),0)]
+  for f,mm in FRG.items() for m in [[x for x in mm if x in df.index]]],
+  columns=['Franchise','Combined DRR','Stock now','Ship','Total after','Franchise DOH after'])
 
 hold=a[a.Hold>0].copy(); hold['Hold_value']=(hold.Hold*hold.Cost).round(0)
 hold=hold[['Tier','PO','Order_date','ASIN','SKU','Product','Open_qty','SHIP_NOW','Hold','Cost','Hold_value','Cancel_by']].sort_values('Hold_value',ascending=False)
@@ -51,7 +55,8 @@ posum=a[a.SHIP_NOW>0].groupby(['PO','Order_date','Window_start','Window_end'],as
 sh=df[df.ship>0]
 summ=pd.DataFrame([
  ['Scope','Vendor code QZ73J / FC ISK3 only'],
- ['Cover policy','35 days max on Sept DRR (1-3 Sep), hard cap'],
+ ['Cover policy','35d cap on ESTABLISHED SKUs only'],
+ ['New arrivals','No cap - ship Amazon full ask (no DRR to cap on)'],
  ['Sellable inventory at Cocoblu (3 Sep)',int(df.sellable.sum())],
  ['Open PO in scope (7 POs, ASN = 0)',int(df.open_po.sum())],
  ['RECOMMENDED SHIP NOW (units)',int(df.ship.sum())],
@@ -59,12 +64,14 @@ summ=pd.DataFrame([
  ['Hold / cancel (units)',int(df.hold.sum())],
  ['Units needed with no PO cover (ask Amazon)',int(df.gap.sum())],
  ['SKUs shipped',int(len(sh))],
- ['Max DOH of any SKU after shipping','%.0f'%sh.doh_after.max()],
+ ['Max DOH - established SKUs after ship','%.0f'%df[(df.arrival=='')&(df.drr_sep>0)&(df.ship>0)].doh_after.max()],
+ ['New arrival units (group A - new PO)',int(df[df.arrival=='A-new PO'].ship.sum())],
+ ['New arrival units (group B - never sold)',int(df[df.arrival=='B-never sold (recent)'].ship.sum())],
  ['Excluded - no supply','Click 20000, Quad Pro 1.5m 60W, Quad Pro Black 1.5m'],
  ['Excluded - other vendor code','PPAFS / 147u at HBA4, HKA2, HNR4, HPN6'],
 ],columns=['Item','Value'])
 
-OUT='/home/user/hybrid/analysis/cocoblu-supply-2026-09-04/Cocoblu_Supply_Plan_v2_35day_ISK3.xlsx'
+OUT='/home/user/hybrid/analysis/cocoblu-supply-2026-09-04/Cocoblu_Supply_Plan_v3_ISK3.xlsx'
 with pd.ExcelWriter(OUT,engine='openpyxl') as w:
     summ.to_excel(w,sheet_name='0_Summary',index=False)
     posum.to_excel(w,sheet_name='1_Dispatch by PO',index=False)
