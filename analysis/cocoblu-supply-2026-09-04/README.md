@@ -3,7 +3,22 @@
 Urgent dispatch plan against open Amazon POs for Stuffcool, built from the
 Vendor Central PO Item Export and the Sales/Inventory/Open-PO workbook.
 
-## v6 (current) - stock availability applied
+## Deliverable
+
+`Cocoblu_supply_04_Sep.xlsx` - built by `deliver.py`. **This is the file to send.**
+
+It follows the team's existing format (`reference_Cocoblu_supply_31_Aug.xlsx`):
+the raw Amazon PO Item Export, unchanged, with one `Supply` column inserted
+after `Remaining quantity`. PO-line level, supply rows only, sorted by
+remaining quantity descending, header on row 2, and SUMPRODUCT(Supply, Cost)
+in row 1 above column R.
+
+3,512 units / Rs 61,91,829 across 33 PO lines.
+
+The workbook below carries the same numbers with the full reasoning
+(cover maths, holds, EOL, gap) for internal use.
+
+## v6 (analysis workbook) - stock availability applied
 
 `Cocoblu_Supply_Plan_v6_ISK3.xlsx` - built by `v2.py -> v9.py -> x6.py`
 
