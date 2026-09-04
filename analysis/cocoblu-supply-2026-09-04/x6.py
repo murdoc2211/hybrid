@@ -84,13 +84,14 @@ summ=pd.DataFrame([
  ['Units needed with no PO cover (ask Amazon)',int(df.gap.sum())],
  ['New arrival units (group A - new PO)',int(df[df.arrival=='A-new PO'].ship.sum())],
  ['New arrival units (group B - never sold)',int(df[df.arrival=='B-never sold (recent)'].ship.sum())],
- ['Excluded - no supply','Click 20000, Quad Pro 1.5m 60W, Zeno 65W retractable'],
+ ['Excluded - no supply','11 SKUs OOS: Click 20000, Quad Pro 1.5m, Zeno 30/65/100W, Jetset Pro, GIGA 65W old, Nemo, Click+ Silver & Grey'],
  ['Excluded - EOL (no Tally sale FY26-27)','%d SKUs / %du'%(int((df.eol&(df.open_po>0)).sum()),int(df[df.eol].open_po.sum()))],
+ ['Excluded - Omni series (instruction)','Omni, Omni Go, Omni Pro'],
  ['Excluded - other vendor code','PPAFS / 147u at HBA4, HKA2, HNR4, HPN6'],
  ['Excluded - EXPIRED PO','39VRVKCF / 1,105u - window closed 1 Sep'],
 ],columns=['Item','Value'])
 
-OUT='/home/user/hybrid/analysis/cocoblu-supply-2026-09-04/Cocoblu_Supply_Plan_v5_ISK3.xlsx'
+OUT='/home/user/hybrid/analysis/cocoblu-supply-2026-09-04/Cocoblu_Supply_Plan_v6_ISK3.xlsx'
 with pd.ExcelWriter(OUT,engine='openpyxl') as w:
     summ.to_excel(w,sheet_name='0_Summary',index=False)
     posum.to_excel(w,sheet_name='1_Dispatch by PO',index=False)

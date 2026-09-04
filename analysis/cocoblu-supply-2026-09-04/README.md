@@ -3,7 +3,23 @@
 Urgent dispatch plan against open Amazon POs for Stuffcool, built from the
 Vendor Central PO Item Export and the Sales/Inventory/Open-PO workbook.
 
-## v5 (current) - EOL gate from Tally
+## v6 (current) - stock availability applied
+
+`Cocoblu_Supply_Plan_v6_ISK3.xlsx` - built by `v2.py -> v9.py -> x6.py`
+
+Same rules as v5, plus the SKUs confirmed out of stock at our end. Eleven
+are now unsupplyable: Click 20000, Quad Pro 1.5m 60W, Quad Pro Black 1.5m,
+Zeno 30W / 65W / 100W, Jetset Pro 70W, GIGA 65W 20000 (old), Nemo 10000,
+Click+ 10000 Silver and Click Plus 10000 Grey (the non-titanium Click 10
+colours; PBCLICK10TNM and PBCLICKPLUSTNM are titanium and still ship).
+The Omni series is excluded on instruction.
+
+Old GIGA being out of stock voids its franchise bridge, so GIGA II stands
+alone and the franchise lands at 33 days.
+
+Result: ship 3,112u / Rs 55.6L (24% of open PO), hold 9,683u, ask for 604u.
+
+## v5 (superseded) - before stock availability - EOL gate from Tally
 
 `Cocoblu_Supply_Plan_v5_ISK3.xlsx` - built by `v2.py -> v8.py -> x5.py`
 

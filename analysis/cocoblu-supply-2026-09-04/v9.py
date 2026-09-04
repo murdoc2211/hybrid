@@ -15,7 +15,21 @@ print(f'  units removed from supply pool: {exp_units}  (Rs {exp_val:,.0f} at cos
 pe=pe[~pe.PO.isin(expired)]
 op=pe[pe['Remaining quantity']>0]
 
-SOLDOUT={'B0DFZ1KDPL','B0C1H6N3FX','B0DSFKRMDM','B0G4VHN9CZ'}  # +Zeno 65W retractable
+SOLDOUT={
+ 'B0DFZ1KDPL',  # Click 20000            - out of stock
+ 'B0C1H6N3FX',  # Quad Pro 1.5m 60W      - out of stock
+ 'B0DSFKRMDM',  # Quad Pro Black 1.5m    - out of stock
+ 'B0G4VHN9CZ',  # Zeno 65W retractable   - out of stock
+ 'B0FT2VNW5H',  # Zeno 30W retractable   - out of stock
+ 'B0GN99CJ8F',  # Zeno 100W desktop      - out of stock
+ 'B0FWQYNB6P',  # Jetset Pro 70W         - out of stock
+ 'B0DMDZF5SV',  # GIGA 65W 20000 (old)   - out of stock
+ 'B0FSRCKNCW',  # Nemo 10000             - out of stock
+ 'B0HGB1T2S7',  # Click+ 10000 Silver    - out of stock (non-titanium)
+ 'B0CG668622',  # Click Plus 10000 Grey  - out of stock (non-titanium)
+ # Omni series - excluded on instruction
+ 'B0H5HYK4KZ','B0H5J81W5D','B0H6Q2YQ9C',
+}
 # ---- EOL gate: a SKU is supplyable only if it was actually billed to Cocoblu in Tally
 # this FY (26-27), or it is a genuine new arrival that cannot have Tally history yet.
 import pandas as _pd
@@ -50,7 +64,7 @@ df['ship']=np.minimum(df['need'],df['open_po'])
 est=(~newA)&(~newB)&(df.drr_sep>0)
 df.loc[est,'ship']=np.minimum(df.loc[est,'open_po'],(df.loc[est,'drr_sep']*COVER-df.loc[est,'sellable']).clip(lower=0).round())
 df['franchise']=''
-for x,f in {'B0DMDZF5SV':'GIGA 20000','B0DFZ3FK9F':'Click 10000 magnetic'}.items():
+for x,f in {'B0DFZ3FK9F':'Click 10000 magnetic'}.items():
     df.loc[x,'franchise']=f
     df.loc[x,'need']=max(0.0,round(df.loc[x,'drr_sep']*BRIDGE-df.loc[x,'sellable']))
     df.loc[x,'ship']=min(df.loc[x,'open_po'],df.loc[x,'need'])
