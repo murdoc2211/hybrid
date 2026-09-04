@@ -84,7 +84,7 @@ summ=pd.DataFrame([
  ['Units needed with no PO cover (ask Amazon)',int(df.gap.sum())],
  ['New arrival units (group A - new PO)',int(df[df.arrival=='A-new PO'].ship.sum())],
  ['New arrival units (group B - never sold)',int(df[df.arrival=='B-never sold (recent)'].ship.sum())],
- ['Excluded - no supply','11 SKUs OOS: Click 20000, Quad Pro 1.5m, Zeno 30/65/100W, Jetset Pro, GIGA 65W old, Nemo, Click+ Silver & Grey'],
+ ['Excluded - no supply','9 SKUs OOS: Click 20000, Quad Pro 1.5m, Quad Pro Black 1.5m, Zeno 30/65/100W, Jetset Pro, GIGA 65W old, Nemo'],
  ['Excluded - EOL (no Tally sale FY26-27)','%d SKUs / %du'%(int((df.eol&(df.open_po>0)).sum()),int(df[df.eol].open_po.sum()))],
  ['Excluded - Omni series (instruction)','Omni, Omni Go, Omni Pro'],
  ['Excluded - other vendor code','PPAFS / 147u at HBA4, HKA2, HNR4, HPN6'],

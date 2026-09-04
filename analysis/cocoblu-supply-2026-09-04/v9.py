@@ -25,8 +25,10 @@ SOLDOUT={
  'B0FWQYNB6P',  # Jetset Pro 70W         - out of stock
  'B0DMDZF5SV',  # GIGA 65W 20000 (old)   - out of stock
  'B0FSRCKNCW',  # Nemo 10000             - out of stock
- 'B0HGB1T2S7',  # Click+ 10000 Silver    - out of stock (non-titanium)
- 'B0CG668622',  # Click Plus 10000 Grey  - out of stock (non-titanium)
+# Click Plus / Click+ is the NEW line - all colours in stock, all ship.
+# The out-of-stock rule applies to simple Click 10 only, where just titanium
+# is available; the only simple Click 10 on an open PO is PBCLICK10TNM
+# (titanium), so nothing is excluded on that count.
  # Omni series - excluded on instruction
  'B0H5HYK4KZ','B0H5J81W5D','B0H6Q2YQ9C',
 }

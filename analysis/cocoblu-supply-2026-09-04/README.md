@@ -7,17 +7,20 @@ Vendor Central PO Item Export and the Sales/Inventory/Open-PO workbook.
 
 `Cocoblu_Supply_Plan_v6_ISK3.xlsx` - built by `v2.py -> v9.py -> x6.py`
 
-Same rules as v5, plus the SKUs confirmed out of stock at our end. Eleven
+Same rules as v5, plus the SKUs confirmed out of stock at our end. Nine
 are now unsupplyable: Click 20000, Quad Pro 1.5m 60W, Quad Pro Black 1.5m,
-Zeno 30W / 65W / 100W, Jetset Pro 70W, GIGA 65W 20000 (old), Nemo 10000,
-Click+ 10000 Silver and Click Plus 10000 Grey (the non-titanium Click 10
-colours; PBCLICK10TNM and PBCLICKPLUSTNM are titanium and still ship).
+Zeno 30W / 65W / 100W, Jetset Pro 70W, GIGA 65W 20000 (old), Nemo 10000.
 The Omni series is excluded on instruction.
+
+Click Plus / Click+ is the new line and all its colours ship. The
+titanium-only constraint applies to simple Click 10, whose sole open-PO line
+is PBCLICK10TNM (titanium), so nothing is cut on that count.
 
 Old GIGA being out of stock voids its franchise bridge, so GIGA II stands
 alone and the franchise lands at 33 days.
 
-Result: ship 3,112u / Rs 55.6L (24% of open PO), hold 9,683u, ask for 604u.
+Result: ship 3,512u / Rs 61.9L (27% of open PO), hold 9,283u, ask for 604u.
+The new PO 1T5I9HTI ships in full (1,200u).
 
 ## v5 (superseded) - before stock availability - EOL gate from Tally
 
