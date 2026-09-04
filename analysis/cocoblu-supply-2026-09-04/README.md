@@ -3,7 +3,26 @@
 Urgent dispatch plan against open Amazon POs for Stuffcool, built from the
 Vendor Central PO Item Export and the Sales/Inventory/Open-PO workbook.
 
-## v4 (current) - expired POs removed
+## v5 (current) - EOL gate from Tally
+
+`Cocoblu_Supply_Plan_v5_ISK3.xlsx` - built by `v2.py -> v8.py -> x5.py`
+
+- **EOL gate.** A SKU is supplyable only if it was actually billed to Cocoblu in
+  Tally this FY (`cocoblu_tally.csv`, exported from the NS Cocoblu Sales(26-27)
+  sheet, Apr-Aug 26, 46 SKUs), or it is a genuine new arrival that cannot have
+  Tally history yet. Everything else is EOL: ships 0, listed in sheet
+  `7_EOL - cancel these` for cancellation.
+- Vendor code **QZ73J**, ship-to **ISK3** only.
+- **Expired POs dropped** from the supply pool (39VRVKCF as of 4 Sep).
+- **35-day cover cap binds established SKUs only**; new arrivals ship the full
+  accepted quantity.
+- Superseded incumbents (old GIGA, Click Slim) bridged to 15 days. Quad Pro Max
+  is live and coexists with Quad Pro Black - normal 35d cap.
+- No supply available (excluded): Click 20000, Quad Pro 1.5m 60W.
+
+Result: ship 4,129u / Rs 73.0L, hold 8,666u, cancel 177u of EOL, ask for 604u.
+
+## v4 (superseded) - no EOL gate - expired POs removed
 
 `Cocoblu_Supply_Plan_v4_ISK3.xlsx` - built by `v7.py -> x4.py`
 

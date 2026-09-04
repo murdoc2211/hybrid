@@ -13,6 +13,7 @@ op=pe[pe['Remaining quantity']>0].sort_values(['Order date','PO'])
 COVER=35
 
 def _t(r):
+    if r.eol: return 'X-EOL (not in Tally FY26-27)'
     if r.soldout: return 'X-No supply'
     if r.arrival=='A-new PO': return 'P0-New arrival (uncapped)'
     if r.arrival=='B-never sold (recent)': return 'P0b-New arrival, never sold'
@@ -70,12 +71,13 @@ summ=pd.DataFrame([
  ['Max DOH - established SKUs after ship','%.0f'%df[(df.arrival=='')&(df.drr_sep>0)&(df.ship>0)].doh_after.max()],
  ['New arrival units (group A - new PO)',int(df[df.arrival=='A-new PO'].ship.sum())],
  ['New arrival units (group B - never sold)',int(df[df.arrival=='B-never sold (recent)'].ship.sum())],
- ['Excluded - no supply','Click 20000, Quad Pro 1.5m 60W, Quad Pro Black 1.5m'],
+ ['Excluded - no supply','Click 20000, Quad Pro 1.5m 60W'],
+ ['Excluded - EOL (no Tally sale FY26-27)','%d SKUs / %du / Rs %s'%(int((df.eol&(df.open_po>0)).sum()),int(df[df.eol].open_po.sum()),'{:,.0f}'.format((df[df.eol].open_po*df[df.eol].cost).sum()))],
  ['Excluded - other vendor code','PPAFS / 147u at HBA4, HKA2, HNR4, HPN6'],
  ['Excluded - EXPIRED PO','39VRVKCF / 1,105u - window closed 1 Sep, get it cancelled'],
 ],columns=['Item','Value'])
 
-OUT='/home/user/hybrid/analysis/cocoblu-supply-2026-09-04/Cocoblu_Supply_Plan_v4_ISK3.xlsx'
+OUT='/home/user/hybrid/analysis/cocoblu-supply-2026-09-04/Cocoblu_Supply_Plan_v5_ISK3.xlsx'
 with pd.ExcelWriter(OUT,engine='openpyxl') as w:
     summ.to_excel(w,sheet_name='0_Summary',index=False)
     posum.to_excel(w,sheet_name='1_Dispatch by PO',index=False)
@@ -84,6 +86,10 @@ with pd.ExcelWriter(OUT,engine='openpyxl') as w:
     fr.to_excel(w,sheet_name='4_Franchise cap',index=False)
     gap.to_excel(w,sheet_name='5_Ask Amazon for PO',index=False)
     hold.to_excel(w,sheet_name='6_Hold or cancel',index=False)
+    eolsh=df[df.eol&(df.open_po>0)].reset_index().rename(columns={'index':'ASIN'})[['ASIN','sku','name','sellable','open_po','cost','open_pos']]
+    eolsh.columns=['ASIN','SKU','Product','Sellable @3Sep','Open PO to cancel','Vendor cost','Open POs']
+    eolsh['Cancel value INR']=(eolsh['Open PO to cancel']*eolsh['Vendor cost']).round(0)
+    eolsh.to_excel(w,sheet_name='7_EOL - cancel these',index=False)
 wb=openpyxl.load_workbook(OUT); fill=PatternFill('solid',fgColor='1F3864')
 for ws in wb.worksheets:
     for c in ws[1]: c.font=Font(bold=True,color='FFFFFF'); c.fill=fill; c.alignment=Alignment(wrap_text=True,vertical='center')

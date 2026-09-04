@@ -16,6 +16,16 @@ pe=pe[~pe.PO.isin(expired)]
 op=pe[pe['Remaining quantity']>0]
 
 SOLDOUT={'B0DFZ1KDPL','B0C1H6N3FX','B0DSFKRMDM'}
+# ---- EOL gate: a SKU is supplyable only if it was actually billed to Cocoblu in Tally
+# this FY (26-27), or it is a genuine new arrival that cannot have Tally history yet.
+import pandas as _pd
+_t=_pd.read_csv('cocoblu_tally.csv',low_memory=False); _t.columns=[c.strip() for c in _t.columns]
+_t['Billed Qty']=_pd.to_numeric(_t['Billed Qty'],errors='coerce').fillna(0)
+TALLY_FY=set(_t.groupby('Product Name')['Billed Qty'].sum()[lambda x:x>0].index)
+_newpo_asins=set(pe[pe.PO=='1T5I9HTI']['ASIN'])
+_sku=pe.groupby('ASIN')['Model number'].first()
+EOL={a for a,mn in _sku.items() if mn not in TALLY_FY and a not in _newpo_asins}
+print('EOL SKUs excluded (no Tally sale to Cocoblu this FY):',len(EOL))
 df=m.drop(columns=['open_po']).join([
     op.groupby('ASIN')['Remaining quantity'].sum().rename('open_po'),
     pe.groupby('ASIN')['Cost'].last().rename('cost'),
@@ -26,7 +36,8 @@ df=df[df.index.notna()&(df.index!='-')]
 nm=pe.groupby('ASIN')['Product name'].first(); sk=pe.groupby('ASIN')['Model number'].first()
 df['name']=df['name'].fillna(nm.reindex(df.index)).fillna(pd.Series('(ASIN '+df.index.astype(str)+')',index=df.index)).str.slice(0,58)
 df['sku']=df['sku'].fillna(sk.reindex(df.index))
-df['soldout']=df.index.isin(SOLDOUT)
+df['eol']=df.index.isin(EOL)
+df['soldout']=df.index.isin(SOLDOUT)|df['eol']
 df['doh_now']=np.where(df['drr_sep']>0,df['sellable']/df['drr_sep'],np.inf)
 df['need']=np.where(df['drr_sep']>0,(df['drr_sep']*COVER-df['sellable']).round(),0.0).clip(0)
 
