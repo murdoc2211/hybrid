@@ -2,10 +2,13 @@ import pandas as pd, numpy as np
 from openpyxl.styles import Font,PatternFill,Alignment
 from openpyxl.utils import get_column_letter
 import openpyxl
-df=pd.read_pickle('v6df.pkl'); pe=pd.read_pickle('po_exp.pkl')
+df=pd.read_pickle('v7df.pkl'); pe=pd.read_pickle('po_exp.pkl')
 pe['Remaining quantity']=pd.to_numeric(pe['Remaining quantity'],errors='coerce').fillna(0)
 pe['Cost']=pd.to_numeric(pe['Cost'],errors='coerce').fillna(0)
 pe=pe[(pe['Vendor code']=='QZ73J')&(pe['Ship-to location']=='ISK3')]
+import datetime
+_we=pe.groupby('PO')['Window end'].max()
+pe=pe[~pe.PO.isin(_we[_we.dt.date<datetime.date(2026,9,4)].index)]  # drop expired POs
 op=pe[pe['Remaining quantity']>0].sort_values(['Order date','PO'])
 COVER=35
 
@@ -69,9 +72,10 @@ summ=pd.DataFrame([
  ['New arrival units (group B - never sold)',int(df[df.arrival=='B-never sold (recent)'].ship.sum())],
  ['Excluded - no supply','Click 20000, Quad Pro 1.5m 60W, Quad Pro Black 1.5m'],
  ['Excluded - other vendor code','PPAFS / 147u at HBA4, HKA2, HNR4, HPN6'],
+ ['Excluded - EXPIRED PO','39VRVKCF / 1,105u - window closed 1 Sep, get it cancelled'],
 ],columns=['Item','Value'])
 
-OUT='/home/user/hybrid/analysis/cocoblu-supply-2026-09-04/Cocoblu_Supply_Plan_v3_ISK3.xlsx'
+OUT='/home/user/hybrid/analysis/cocoblu-supply-2026-09-04/Cocoblu_Supply_Plan_v4_ISK3.xlsx'
 with pd.ExcelWriter(OUT,engine='openpyxl') as w:
     summ.to_excel(w,sheet_name='0_Summary',index=False)
     posum.to_excel(w,sheet_name='1_Dispatch by PO',index=False)

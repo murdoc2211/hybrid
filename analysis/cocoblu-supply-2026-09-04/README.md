@@ -3,7 +3,28 @@
 Urgent dispatch plan against open Amazon POs for Stuffcool, built from the
 Vendor Central PO Item Export and the Sales/Inventory/Open-PO workbook.
 
-## v3 (current) - 35d cap on established SKUs only, ISK3
+## v4 (current) - expired POs removed
+
+`Cocoblu_Supply_Plan_v4_ISK3.xlsx` - built by `v7.py -> x4.py`
+
+- Vendor code **QZ73J**, ship-to **ISK3** only.
+- **POs whose delivery window has closed are dropped from the supply pool.**
+  As of 4 Sep that is 39VRVKCF (1,105u, window closed 1 Sep). Demand it was
+  covering reallocates onto still-open POs for the same ASINs; whatever cannot
+  be covered flows into the "ask Amazon" gap list rather than being planned
+  against a dead PO.
+- **35-day cover cap binds established SKUs only.** New arrivals have no DRR
+  to cap against, so they ship Amazon's full accepted quantity.
+- Superseded incumbents (old GIGA, Click Slim) bridged to 15 days.
+  Quad Pro Max is live and coexists with Quad Pro Black - normal 35d cap.
+- Residual lines of 20u or fewer on zero-stock SKUs ship in full to close the
+  PO line; immaterial quantities, and it protects fill rate.
+- No supply available (excluded): Click 20000, Quad Pro 1.5m 60W,
+  Quad Pro Black 1.5m.
+
+Result: ship 4,200u / Rs 74.1L across 6 live POs, hold 8,595u, ask Amazon for 604u.
+
+## v3 (superseded) - expired PO still in the pool - 35d cap on established SKUs only, ISK3
 
 `Cocoblu_Supply_Plan_v3_ISK3.xlsx` - built by `v2.py -> v6.py -> x3.py`
 
