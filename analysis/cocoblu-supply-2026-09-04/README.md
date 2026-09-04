@@ -13,14 +13,17 @@ Vendor Central PO Item Export and the Sales/Inventory/Open-PO workbook.
   to cap against, so it ships Amazon's full accepted quantity.
   - Group A - on the new PO 1T5I9HTI (1,200u)
   - Group B - never sold, at or under 15u on hand, recent ASIN (512u)
-- Incumbents of a superseded franchise (old GIGA, Click Slim, Quad Pro Max)
-  are bridged to 15 days only, so they run down as the successor lands.
-  This trims the old SKU, never the new arrival.
+- Incumbents of a **superseded** franchise (old GIGA, Click Slim) are bridged
+  to 15 days only, so they run down as the successor lands. This trims the old
+  SKU, never the new arrival.
+- Quad Pro Max is **not** superseded by Quad Pro Black - 240W/1.5m vs 100W/1.2m
+  are different spec tiers that coexist, both live. Max takes the normal 35d
+  cap (ships 60), not a run-down.
 - No supply available (excluded): Click 20000, Quad Pro 1.5m 60W,
   Quad Pro Black 1.5m.
 
-Result: ship 4,221u / Rs 74.4L, hold 9,679u, ask Amazon for 559u not on any PO.
-Franchise DOH after landing: GIGA 41d, Click 48d, Quad Pro 55d - the cost of
+Result: ship 4,281u / Rs 74.7L, hold 9,619u, ask Amazon for 559u not on any PO.
+Franchise DOH after landing: GIGA 41d, Click 48d, Quad Pro 60d - the cost of
 uncapping new arrivals, shown in sheet `4_Franchise cap` rather than capped away.
 
 ## v2 (superseded) - 35-day cap on everything - 35-day cap, ISK3 only

@@ -39,7 +39,7 @@ sku=sku[['ASIN','sku','name','tier','arrival','franchise','sellable','drr_sep','
 sku.columns=['ASIN','SKU','Product','Tier','New arrival','Franchise','Sellable @3Sep','DRR (1-3 Sep)','DOH now','Need @35d','Open PO','SHIP NOW','DOH after','Hold on PO','Gap - need PO','Vendor cost','Ship value INR','Open POs','No supply']
 sku=sku[(sku['Sellable @3Sep']>0)|(sku['Open PO']>0)|(sku['DRR (1-3 Sep)']>0)].sort_values(['Tier','Ship value INR'],ascending=[True,False])
 
-FRG={'GIGA 20000':['B0DMDZF5SV','B0HFJGKC8H'],'Click 10000 magnetic':['B0DFZ3FK9F','B0HGB1DJKY','B0HGB1T2S7','B0CG668622'],'Quad Pro cable':['B0D8443PTW','B0H71NCHP7']}
+FRG={'GIGA 20000':['B0DMDZF5SV','B0HFJGKC8H'],'Click 10000 magnetic':['B0DFZ3FK9F','B0HGB1DJKY','B0HGB1T2S7','B0CG668622'],'Quad Pro cables (coexist)':['B0D8443PTW','B0H71NCHP7']}
 fr=pd.DataFrame([[f,round(df.loc[m,'drr_sep'].sum(),1),int(df.loc[m,'sellable'].sum()),int(df.loc[m,'ship'].sum()),
   int(df.loc[m,'sellable'].sum()+df.loc[m,'ship'].sum()),
   round((df.loc[m,'sellable'].sum()+df.loc[m,'ship'].sum())/df.loc[m,'drr_sep'].sum(),0)]

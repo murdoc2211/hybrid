@@ -14,7 +14,9 @@ df.loc[df.soldout,'ship']=0
 est=(~newA)&(~newB)&(df.drr_sep>0)
 df.loc[est,'ship']=np.minimum(df.loc[est,'open_po'],(df.loc[est,'drr_sep']*COVER-df.loc[est,'sellable']).clip(lower=0).round())
 # incumbents of a superseded franchise: bridge only to BRIDGE days, let them run down
-INC={'B0DMDZF5SV':'GIGA 20000','B0DFZ3FK9F':'Click 10000 magnetic','B0D8443PTW':'Quad Pro cable'}
+# Quad Pro Max is live and NOT superseded by Quad Pro Black (240W/1.5m vs 100W/1.2m,
+# different spec tiers that coexist) - it takes the normal 35d cap, no run-down.
+INC={'B0DMDZF5SV':'GIGA 20000','B0DFZ3FK9F':'Click 10000 magnetic'}
 for x,f in INC.items():
     df.loc[x,'ship']=min(df.loc[x,'open_po'],max(0.0,round(df.loc[x,'drr_sep']*BRIDGE-df.loc[x,'sellable'])))
     df.loc[x,'franchise']=f
@@ -30,7 +32,7 @@ print('\n  group A',int(df[newA].ship.sum()),'u / Rs',f"{df[newA].ship_val.sum()
 print('\nFRANCHISE CHECK (old + new combined, post-ship)')
 for f in ['GIGA 20000','Click 10000 magnetic','Quad Pro cable']:
     g=df[df.franchise==f] if (df.franchise==f).any() else None
-FR={'GIGA 20000':['B0DMDZF5SV','B0HFJGKC8H'],'Click 10000 magnetic':['B0DFZ3FK9F','B0HGB1DJKY','B0HGB1T2S7','B0CG668622'],'Quad Pro cable':['B0D8443PTW','B0H71NCHP7']}
+FR={'GIGA 20000':['B0DMDZF5SV','B0HFJGKC8H'],'Click 10000 magnetic':['B0DFZ3FK9F','B0HGB1DJKY','B0HGB1T2S7','B0CG668622'],'Quad Pro cables (coexist)':['B0D8443PTW','B0H71NCHP7']}
 for f,mem in FR.items():
     mem=[x for x in mem if x in df.index]; g=df.loc[mem]
     print(f"  {f:24} drr {g.drr_sep.sum():5.1f} | stock {int(g.sellable.sum()):5} + ship {int(g.ship.sum()):5} = {int(g.sellable.sum()+g.ship.sum()):5} -> {(g.sellable.sum()+g.ship.sum())/g.drr_sep.sum():5.0f} days")
