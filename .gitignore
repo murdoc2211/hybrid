@@ -1,0 +1,3 @@
+
+# Analysis working data (vendor data - do not commit)
+analysis/**/*.pkl
